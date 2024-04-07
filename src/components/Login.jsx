@@ -1,9 +1,11 @@
 import React from 'react';
+import Header from './Header';
 
 const Login = () => {
     return (
         <div>
-        <h1>Login</h1>
+            <Header />
+            <img src="src\assets\bgdrop.jpg" alt="bgdrop" />
         </div>
     );
 };
