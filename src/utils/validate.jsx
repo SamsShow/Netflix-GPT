@@ -1,19 +1,17 @@
-export const validate = (email, password) => {
-    const errors = {};
+export const checkValidation = (email, password, name) => {
+    const isValidEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
+    const isValidPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{6,20})/.test(password);
+    const isValidName = /^[a-z\s]{1,255}$/i.test(name);
 
-    if (!email) {
-        errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-        errors.email = 'Invalid email address';
-    }
+    const validationObj = {
+        'email': { isValid: true },
+        'password': { isValid: true },
+        'name': { isValid: true },
+    };
+    if (!isValidEmail) validationObj['email'] = { isValid: false, message: "Enter valid email" };
+    if (!isValidPassword) validationObj['password'] = { isValid: false, message: "Enter valid password" };
+    if (!isValidName) validationObj['name'] = { isValid: false, message: "Enter valid name" };
 
-    if (!password) {
-        errors.password = 'Required';
-    } else if (password.length < 8) {
-        errors.password = 'Password must be at least 8 characters long';
-    } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
-        errors.password = 'Password must contain at least one letter and one number';
-    }
+    return [validationObj,isValidEmail && isValidName && isValidPassword];
 
-    return errors;
-};
+}
