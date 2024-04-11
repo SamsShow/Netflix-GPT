@@ -2,8 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth} from "firebase/auth";
-import { config } from "dotenv";
-config();
+// require("dotenv").config() 
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -12,7 +11,7 @@ config();
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.Firebase_API,
+  apiKey: "AIzaSyBBNZHFm0KbN6ueAB9lX0sAAXflSUwUutA",
   authDomain: "netflixgpt-9cad5.firebaseapp.com",
   projectId: "netflixgpt-9cad5",
   storageBucket: "netflixgpt-9cad5.appspot.com",
