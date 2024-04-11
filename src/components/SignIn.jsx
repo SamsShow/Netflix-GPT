@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { checkValidation } from "../utils/validate";
-import { createUserWithEmailAndPassword } from "firebase/auth"; // Add import statement
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth"; // Add import statement
 import { auth } from "../utils/firebase";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { addUser } from "../../utils/store/userSlice";
 
 const Form = () => {
@@ -59,22 +59,23 @@ const Form = () => {
         .catch((error) => {
           const errorCode = error.code;
 
-          if (errorCode === "auth/email-already-in-use") {
+          if (errorCode) {
             setError("User with this email is already exist !");
           }
         });
     } else {
-      // signInWithEmailAndPassword(auth, email.current.value, password.current.value,)
-      //     .then((userCredential) => {
-      //         // Signed in
-      //         // ...
-      //     })
-      //     .catch((error) => {
-      //         const errorCode = error.code;
-      //         if (errorCode === "auth/invalid-login-credentials") {
-      //             setError("Invalid email or password");
-      //         }
-      //     });
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value,)
+          .then((userCredential) => {
+              // Signed in
+              // ...
+              console.log(userCredential.user);
+          })
+          .catch((error) => {
+              const errorCode = error.code;
+              if (errorCode) {
+                  setError("Invalid email or password");
+              }
+          });
     }
   };
 
